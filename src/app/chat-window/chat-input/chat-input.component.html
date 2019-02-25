@@ -1,0 +1,19 @@
+<div class="input-group">
+  <div id="text-input"
+       #input
+       class="form-control"
+       contenteditable="true"
+       (keydown.enter)="(!isMultilineText) ? emitMessage($event) : undefined"
+       (keydown.shift.enter)="(isMultilineText) ? emitMessage($event) : undefined">
+  </div>
+  <div class="input-group-append">
+    <div class="input-group-text">
+      <button id="send-btn"
+              class="btn"
+              (mousedown)="$event.preventDefault()"
+              (click)="emitMessage()">
+        <fa-icon [icon]="faArrowCircleUp"></fa-icon>
+      </button>
+    </div>
+  </div>
+</div>

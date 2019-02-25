@@ -1,0 +1,26 @@
+:host {
+  display: grid;
+
+  grid-template-columns: 0.8fr 0.2fr;
+  grid-template-rows: 1fr;
+  grid-gap: 1.5rem;
+
+  height: 100%;
+  width: 100%;
+
+  padding: 1rem 1rem 2rem 1rem;
+
+  --user-color: #4c85ff;
+}
+
+messages-window, users-panel {
+  --accent-color: var(--user-color);
+  --header-text-color: white;
+}
+
+chat-input {
+  grid-column: span 2;
+
+  border-color: var(--user-color);
+  --btn-color: var(--user-color);
+}

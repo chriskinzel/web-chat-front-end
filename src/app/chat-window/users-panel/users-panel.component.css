@@ -1,0 +1,24 @@
+:host {
+  --accent-color: rgba(0,0,0,.125);
+  --header-text-color: black;
+}
+
+.card {
+  border-color: var(--accent-color);
+}
+.card-header {
+  background-color: var(--accent-color);
+  color: var(--header-text-color);
+}
+
+.users-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+
+  overflow-y: scroll;
+}
+
+.user {
+  display: block;
+}

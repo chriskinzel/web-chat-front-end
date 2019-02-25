@@ -1,0 +1,57 @@
+:host {
+  display: block;
+  --btn-color: default;
+}
+
+.input-group, .form-control, .input-group-append, .input-group-append > :first-child {
+  border-color: inherit;
+}
+
+#text-input {
+  height: auto;
+  max-height: 6rem;
+  overflow-y: scroll;
+
+  padding: 0.6rem;
+}
+
+#send-btn {
+  color: var(--btn-color);
+  font-size: 1.5rem;
+  padding: 0;
+
+  align-self: flex-end;
+}
+#send-btn:hover > fa-icon {
+  filter: brightness(120%);
+}
+
+.input-group > .input-group-append > :first-child {
+  border-left: 0;
+}
+
+.input-group > .form-control {
+  border-right: 0;
+}
+
+.input-group > .input-group-append {
+  position: relative;
+  z-index: 10;
+}
+.input-group-append > .input-group-text {
+  z-index: 0;
+  padding: 0.1rem 0.5rem;
+}
+
+.input-group > .form-control:focus + .input-group-append:before {
+  display:block;
+  content: "";
+
+  position: absolute;
+  top: 0;
+  left: 0.45rem;
+  bottom: 0;
+  right: 0;
+
+  box-shadow: 0 0 0 .2rem rgba(0,123,255,.25);
+}
