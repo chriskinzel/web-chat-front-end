@@ -10,6 +10,6 @@ export class MessagesWindowComponent {
   @Input() messages: Message[] = [];
 
   public trackMessagesBy(index: number, message: Message) {
-    return (message.user) ? message.user.name : message.content;
+    return index;
   }
 }
