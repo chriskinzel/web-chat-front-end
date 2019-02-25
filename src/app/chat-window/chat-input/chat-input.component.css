@@ -3,6 +3,19 @@
   --btn-color: default;
 }
 
+.input-group.disabled, :not(.disabled) .placeholder {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.placeholder {
+  position: absolute;
+  top: 50%;
+  left: 0.6rem;
+
+  transform: translate(0, -50%);
+}
+
 .input-group, .form-control, .input-group-append, .input-group-append > :first-child {
   border-color: inherit;
 }
@@ -13,6 +26,8 @@
   overflow-y: scroll;
 
   padding: 0.6rem;
+
+  color: black;
 }
 
 #send-btn {
@@ -43,7 +58,7 @@
   padding: 0.1rem 0.5rem;
 }
 
-.input-group > .form-control:focus + .input-group-append:before {
+.input-group > .form-control:focus ~ .input-group-append:before {
   display:block;
   content: "";
 

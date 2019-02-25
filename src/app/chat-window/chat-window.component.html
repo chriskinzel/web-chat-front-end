@@ -1,4 +1,6 @@
-<messages-window></messages-window>
+<messages-window [messages]="messageService.messages | async"></messages-window>
 <users-panel></users-panel>
 
-<chat-input></chat-input>
+<chat-input [placeholder]="(messageService.isConnected) ? 'Type a message or type \\help for a list of available commands' : 'No connection to server.'"
+            [disabled]="!messageService.isConnected"
+            (message)="messageService.sendMessage($event)"></chat-input>

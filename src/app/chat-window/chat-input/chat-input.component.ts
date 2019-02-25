@@ -1,4 +1,4 @@
-import {Component, ElementRef, EventEmitter, Output, ViewChild} from '@angular/core';
+import {ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, Output, ViewChild} from '@angular/core';
 import {faArrowCircleUp} from '@fortawesome/free-solid-svg-icons/faArrowCircleUp';
 
 @Component({
@@ -7,11 +7,16 @@ import {faArrowCircleUp} from '@fortawesome/free-solid-svg-icons/faArrowCircleUp
   styleUrls: ['./chat-input.component.css']
 })
 export class ChatInputComponent {
+  @Input() placeholder: string;
+  @Input() disabled = false;
+
   @Output() message = new EventEmitter<string>();
 
   public readonly faArrowCircleUp = faArrowCircleUp;
 
   @ViewChild('input') textboxElementRef: ElementRef;
+
+  constructor(public changeDetector: ChangeDetectorRef) {}
 
   public emitMessage(event?: Event) {
     if (event) {

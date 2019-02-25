@@ -1,7 +1,7 @@
 <div class="card h-100">
   <h5 class="card-header">You are User1.</h5>
-  <div class="card-body messages-container">
-    <message [message]="{content: 'You are User1.'}"></message>
-    <message [message]="{content: 'Hello World!'}"></message>
+  <div #messagesContainer class="card-body messages-container" [scrollTop]="messagesContainer.scrollHeight">
+    <div class="pushdown"></div>
+    <message *ngFor="let message of messages; trackBy: trackMessagesBy" [message]="message"></message>
   </div>
 </div>

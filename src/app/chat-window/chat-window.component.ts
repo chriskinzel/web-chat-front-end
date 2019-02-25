@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {MessageService} from '../shared/services/message-service/message.service';
 
 @Component({
   selector: 'chat-window',
@@ -7,4 +8,5 @@ import { Component } from '@angular/core';
 })
 export class ChatWindowComponent {
 
+  constructor(public messageService: MessageService) {}
 }

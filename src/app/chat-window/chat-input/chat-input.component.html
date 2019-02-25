@@ -1,11 +1,13 @@
-<div class="input-group">
+<div class="input-group position-relative" [class.disabled]="disabled">
   <div id="text-input"
        #input
        class="form-control"
        contenteditable="true"
+       (blur)="input.innerText = input.innerText.trim(); changeDetector.detectChanges()"
        (keydown.enter)="(!isMultilineText) ? emitMessage($event) : undefined"
        (keydown.shift.enter)="(isMultilineText) ? emitMessage($event) : undefined">
   </div>
+  <span class="placeholder" [hidden]="input.innerText.length > 0">{{placeholder}}</span>
   <div class="input-group-append">
     <div class="input-group-text">
       <button id="send-btn"
