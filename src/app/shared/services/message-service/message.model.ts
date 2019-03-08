@@ -4,4 +4,5 @@ export interface Message {
   readonly content: string;
   readonly user: User | undefined;
   readonly timestamp: Date | undefined;
+  readonly isFromCurrentUser: boolean;
 }

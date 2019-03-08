@@ -1,9 +1,65 @@
-import { Injectable } from '@angular/core';
+import {ApplicationRef, Inject, Injectable} from '@angular/core';
+import {BehaviorSubject, Observable} from 'rxjs';
+import {User} from './user.model';
+import {skipWhile} from 'rxjs/operators';
+import {SocketIO, SocketIOSocket} from '../../socket-io/socket-io.module';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
+  private readonly usersEmitter$ = new BehaviorSubject<User[]>([]);
+  private readonly currentUserEmitter$ = new BehaviorSubject<User>(undefined);
 
-  constructor() { }
+  constructor(@Inject(SocketIO) private socketIO: SocketIOSocket,
+              private applicationRef: ApplicationRef) {
+    this.setupEventListeners();
+  }
+
+  public get currentUser$(): Observable<User> {
+    return this.currentUserEmitter$.pipe(
+      skipWhile(user => user === undefined)
+    );
+  }
+
+  public get currentUser(): User {
+    return this.currentUserEmitter$.value;
+  }
+
+  public get users$(): Observable<User[]> {
+    return this.usersEmitter$.asObservable();
+  }
+
+  private setupEventListeners() {
+    this.socketIO.on('setUser', user => {
+      this.currentUserEmitter$.next(user);
+      this.applicationRef.tick();
+    });
+
+    this.socketIO.on('listUsers', users => {
+      this.usersEmitter$.next(users);
+      this.applicationRef.tick();
+    });
+
+    this.socketIO.on('newUser', user => {
+      if (this.currentUserEmitter$.value !== undefined && user.name !== this.currentUserEmitter$.value.name) {
+        this.usersEmitter$.next(this.usersEmitter$.value.concat(user));
+        this.applicationRef.tick();
+      }
+    });
+
+    this.socketIO.on('removeUser', user => {
+      this.usersEmitter$.next(
+        this.usersEmitter$.value.filter(u => u.name !== user.name)
+      );
+      this.applicationRef.tick();
+    });
+
+    this.socketIO.on('disconnect', () => {
+      this.usersEmitter$.next([]);
+      this.currentUserEmitter$.next(undefined);
+
+      this.applicationRef.tick();
+    });
+  }
 }

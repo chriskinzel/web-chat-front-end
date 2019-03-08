@@ -1,5 +1,18 @@
 <div class="card h-100">
-  <h5 class="card-header">You are User1.</h5>
+  <h5 class="card-header">
+    <ng-container *ngIf="!hasConnection">
+      Not connected.
+    </ng-container>
+
+    <ng-container *ngIf="hasConnection">
+      <ng-container *ngIf="currentUser === undefined || currentUser === null">
+        Acquiring user...
+      </ng-container>
+      <ng-container *ngIf="currentUser">
+        You are {{currentUser.name}}.
+      </ng-container>
+    </ng-container>
+  </h5>
   <div #messagesContainer class="card-body messages-container" [scrollTop]="messagesContainer.scrollHeight">
     <div class="pushdown"></div>
     <message *ngFor="let message of messages; trackBy: trackMessagesBy" [message]="message"></message>

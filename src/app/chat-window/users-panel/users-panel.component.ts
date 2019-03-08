@@ -1,15 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input} from '@angular/core';
+import {User} from '../../shared/services/user-service/user.model';
 
 @Component({
   selector: 'users-panel',
   templateUrl: './users-panel.component.html',
   styleUrls: ['./users-panel.component.css']
 })
-export class UsersPanelComponent implements OnInit {
+export class UsersPanelComponent {
+  @Input() users: User[] = [];
 
-  constructor() { }
-
-  ngOnInit() {
+  public trackUsersBy(index: number, user: User) {
+    return user.name;
   }
-
 }

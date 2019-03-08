@@ -1,5 +1,8 @@
-<messages-window [messages]="messageService.messages | async"></messages-window>
-<users-panel></users-panel>
+<messages-window [currentUser]="userService.currentUser$ | async"
+                 [messages]="messageService.messages | async"
+                 [hasConnection]="messageService.isConnected"></messages-window>
+
+<users-panel [users]="userService.users$ | async"></users-panel>
 
 <chat-input [placeholder]="(messageService.isConnected) ? 'Type a message or type \\help for a list of available commands' : 'No connection to server.'"
             [disabled]="!messageService.isConnected"

@@ -8,6 +8,8 @@ import { MessagesWindowComponent } from './chat-window/messages-window/messages-
 import { UsersPanelComponent } from './chat-window/users-panel/users-panel.component';
 import { MessageComponent } from './chat-window/messages-window/message/message.component';
 import { ChatInputComponent } from './chat-window/chat-input/chat-input.component';
+import {SocketIOModule} from './shared/socket-io/socket-io.module';
+import {environment} from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,8 @@ import { ChatInputComponent } from './chat-window/chat-input/chat-input.componen
   ],
   imports: [
     BrowserModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    SocketIOModule.usingURI(environment.socketIOURL)
   ],
   providers: [],
   bootstrap: [AppComponent]
