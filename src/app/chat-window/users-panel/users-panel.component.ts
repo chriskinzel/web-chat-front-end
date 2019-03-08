@@ -8,6 +8,7 @@ import {User} from '../../shared/services/user-service/user.model';
 })
 export class UsersPanelComponent {
   @Input() users: User[] = [];
+  @Input() currentUser: User;
 
   public trackUsersBy(index: number, user: User) {
     return user.name;

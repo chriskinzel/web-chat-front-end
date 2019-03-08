@@ -24,4 +24,19 @@
 
 .user {
   display: block;
+  white-space: nowrap;
+}
+
+:host.horizontal .users-container {
+  flex-direction: row;
+  overflow-x: scroll;
+  align-items: center;
+}
+
+:host.horizontal .users-container > .pushdown {
+  flex: 0;
+}
+
+:host.horizontal .users-container > .user {
+  padding-right: 1rem;
 }

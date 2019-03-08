@@ -2,6 +2,11 @@
   <h5 class="card-header">Online users:</h5>
   <div #usersContainer class="card-body users-container" [scrollTop]="usersContainer.scrollHeight">
     <div class="pushdown"></div>
-    <span class="user" *ngFor="let user of users; trackBy: trackUsersBy" [style.color]="user.color">{{user.name}}</span>
+    <span class="user"
+          *ngFor="let user of users; trackBy: trackUsersBy"
+          [style.color]="user.color"
+          [class.font-weight-bold]="currentUser !== undefined && user.name === currentUser.name">
+      {{user.name}}
+    </span>
   </div>
 </div>

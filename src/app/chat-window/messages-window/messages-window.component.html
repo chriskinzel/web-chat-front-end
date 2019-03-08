@@ -13,8 +13,10 @@
       </ng-container>
     </ng-container>
   </h5>
-  <div #messagesContainer class="card-body messages-container" [scrollTop]="messagesContainer.scrollHeight">
-    <div class="pushdown"></div>
-    <message *ngFor="let message of messages; trackBy: trackMessagesBy" [message]="message"></message>
+  <div class="card-body position-relative">
+    <div #messagesContainer class="messages-container" [scrollTop]="messagesContainer.scrollHeight">
+      <div class="pushdown"></div>
+      <message *ngFor="let message of messages; trackBy: trackMessagesBy" [message]="message"></message>
+    </div>
   </div>
 </div>

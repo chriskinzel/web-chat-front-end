@@ -1,14 +1,14 @@
 :host {
   display: grid;
 
-  grid-template-columns: 0.8fr 0.2fr;
-  grid-template-rows: 80vh;
+  grid-template-columns: 1fr 0.25fr;
+  grid-template-rows: minmax(0, 100%);
   grid-gap: 1.5rem;
 
   height: 100%;
   width: 100%;
 
-  padding: 1rem 1rem 2rem 1rem;
+  padding: 1rem;
 
   --user-color: #4c85ff;
 }
@@ -18,9 +18,58 @@ messages-window, users-panel {
   --header-text-color: white;
 }
 
+users-panel.horizontal {
+  display: none;
+}
+
 chat-input {
-  grid-column: span 2;
+  width: 100%;
 
   border-color: var(--user-color);
   --btn-color: var(--user-color);
+}
+
+.input-container {
+  display: flex;
+  align-items: center;
+
+  grid-column: span 2;
+}
+
+@media (max-width: 932px) {
+  :host {
+    grid-template-columns: minmax(0, auto);
+    grid-template-rows: minmax(auto, 7rem) minmax(auto, calc(100% - 12rem)) minmax(0, auto);
+  }
+
+  .input-container {
+    grid-column: initial;
+  }
+
+  users-panel.horizontal {
+    display: block;
+  }
+  users-panel.vertical {
+    display: none;
+  }
+}
+
+@media (max-aspect-ratio: 1/1) {
+  :host {
+    grid-template-rows: minmax(auto, 7rem) minmax(auto, calc(100% - 11rem)) minmax(0, auto);
+
+    grid-gap: 0;
+    padding: 0 0.1rem;
+  }
+
+  users-panel::ng-deep .card {
+    border-radius: 0;
+  }
+  messages-window::ng-deep .card {
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+  }
+  messages-window::ng-deep .card-header, users-panel::ng-deep .card-header {
+    border-radius: 0;
+  }
 }

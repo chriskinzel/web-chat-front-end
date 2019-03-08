@@ -14,6 +14,8 @@
   left: 0.6rem;
 
   transform: translate(0, -50%);
+
+  padding-right: 2.5rem;
 }
 
 .input-group, .form-control, .input-group-append, .input-group-append > :first-child {

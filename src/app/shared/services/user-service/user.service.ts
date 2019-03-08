@@ -3,6 +3,7 @@ import {BehaviorSubject, Observable} from 'rxjs';
 import {User} from './user.model';
 import {skipWhile} from 'rxjs/operators';
 import {SocketIO, SocketIOSocket} from '../../socket-io/socket-io.module';
+import {CookieService} from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,8 @@ export class UserService {
   private readonly currentUserEmitter$ = new BehaviorSubject<User>(undefined);
 
   constructor(@Inject(SocketIO) private socketIO: SocketIOSocket,
-              private applicationRef: ApplicationRef) {
+              private applicationRef: ApplicationRef,
+              private cookieService: CookieService) {
     this.setupEventListeners();
   }
 
@@ -32,6 +34,8 @@ export class UserService {
 
   private setupEventListeners() {
     this.socketIO.on('setUser', user => {
+      this.cookieService.set('user', JSON.stringify(user));
+
       this.currentUserEmitter$.next(user);
       this.applicationRef.tick();
     });

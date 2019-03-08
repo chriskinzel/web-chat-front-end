@@ -10,6 +10,7 @@ import { MessageComponent } from './chat-window/messages-window/message/message.
 import { ChatInputComponent } from './chat-window/chat-input/chat-input.component';
 import {SocketIOModule} from './shared/socket-io/socket-io.module';
 import {environment} from '../environments/environment';
+import {CookieService} from 'ngx-cookie-service';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,9 @@ import {environment} from '../environments/environment';
     FontAwesomeModule,
     SocketIOModule.usingURI(environment.socketIOURL)
   ],
-  providers: [],
+  providers: [
+    CookieService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
