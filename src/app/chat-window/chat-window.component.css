@@ -1,4 +1,4 @@
-:host {
+.window {
   display: grid;
 
   grid-template-columns: 1fr 0.25fr;
@@ -37,7 +37,7 @@ chat-input {
 }
 
 @media (max-width: 932px) {
-  :host {
+  .window {
     grid-template-columns: minmax(0, auto);
     grid-template-rows: minmax(auto, 7rem) minmax(auto, calc(100% - 12rem)) minmax(0, auto);
   }
@@ -55,7 +55,7 @@ chat-input {
 }
 
 @media (max-aspect-ratio: 1/1) {
-  :host {
+  .window {
     grid-template-rows: minmax(auto, 7rem) minmax(auto, calc(100% - 11rem)) minmax(0, auto);
 
     grid-gap: 0;

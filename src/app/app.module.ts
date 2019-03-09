@@ -12,6 +12,7 @@ import {SocketIOModule} from './shared/socket-io/socket-io.module';
 import {environment} from '../environments/environment';
 import {CookieService} from 'ngx-cookie-service';
 import { TrustHtmlPipe } from './shared/pipes/trust-html/trust-html.pipe';
+import { TrustCssPipe } from './shared/pipes/trust-css/trust-css.pipe';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { TrustHtmlPipe } from './shared/pipes/trust-html/trust-html.pipe';
     UsersPanelComponent,
     MessageComponent,
     ChatInputComponent,
-    TrustHtmlPipe
+    TrustHtmlPipe,
+    TrustCssPipe
   ],
   imports: [
     BrowserModule,

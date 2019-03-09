@@ -1,17 +1,19 @@
-<users-panel class="horizontal"
-             [users]="userService.users$ | async"
-             [currentUser]="userService.currentUser$ | async"></users-panel>
+<div class="window" [style]="userColorStyle$ | async | trustCss">
+  <users-panel class="horizontal"
+               [users]="userService.users$ | async"
+               [currentUser]="userService.currentUser$ | async"></users-panel>
 
-<messages-window [currentUser]="userService.currentUser$ | async"
-                 [messages]="messageService.messages | async"
-                 [hasConnection]="messageService.isConnected"></messages-window>
+  <messages-window [currentUser]="userService.currentUser$ | async"
+                   [messages]="messageService.messages | async"
+                   [hasConnection]="messageService.isConnected"></messages-window>
 
-<users-panel class="vertical"
-             [users]="userService.users$ | async"
-             [currentUser]="userService.currentUser$ | async"></users-panel>
+  <users-panel class="vertical"
+               [users]="userService.users$ | async"
+               [currentUser]="userService.currentUser$ | async"></users-panel>
 
-<div class="input-container">
-  <chat-input [placeholder]="(messageService.isConnected) ? 'Type a message or type \\help for a list of available commands' : 'No connection to server.'"
-              [disabled]="!messageService.isConnected"
-              (message)="messageService.sendMessage($event)"></chat-input>
+  <div class="input-container">
+    <chat-input [placeholder]="(messageService.isConnected) ? 'Type a message or type \\help for a list of available commands' : 'No connection to server.'"
+                [disabled]="!messageService.isConnected"
+                (message)="messageService.sendMessage($event)"></chat-input>
+  </div>
 </div>
