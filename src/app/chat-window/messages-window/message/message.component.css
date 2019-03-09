@@ -2,3 +2,7 @@
   display: block;
   white-space: pre;
 }
+
+pre {
+  margin: 0.25rem 0;
+}

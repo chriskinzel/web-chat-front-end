@@ -11,6 +11,7 @@ import { ChatInputComponent } from './chat-window/chat-input/chat-input.componen
 import {SocketIOModule} from './shared/socket-io/socket-io.module';
 import {environment} from '../environments/environment';
 import {CookieService} from 'ngx-cookie-service';
+import { TrustHtmlPipe } from './shared/pipes/trust-html/trust-html.pipe';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import {CookieService} from 'ngx-cookie-service';
     MessagesWindowComponent,
     UsersPanelComponent,
     MessageComponent,
-    ChatInputComponent
+    ChatInputComponent,
+    TrustHtmlPipe
   ],
   imports: [
     BrowserModule,

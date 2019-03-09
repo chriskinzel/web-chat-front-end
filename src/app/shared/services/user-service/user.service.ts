@@ -59,6 +59,17 @@ export class UserService {
       this.applicationRef.tick();
     });
 
+    this.socketIO.on('updateUser', (changeInfo: {target: string, updatedUser: User}) => {
+      const renamedUsers = this.usersEmitter$.value.map(user =>
+        (user.name === changeInfo.target)
+          ? changeInfo.updatedUser
+          : user
+      );
+
+      this.usersEmitter$.next(renamedUsers);
+      this.applicationRef.tick();
+    });
+
     this.socketIO.on('disconnect', () => {
       this.usersEmitter$.next([]);
       this.currentUserEmitter$.next(undefined);

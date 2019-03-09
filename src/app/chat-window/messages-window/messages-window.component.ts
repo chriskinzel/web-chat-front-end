@@ -13,6 +13,6 @@ export class MessagesWindowComponent {
   @Input() hasConnection = false;
 
   public trackMessagesBy(index: number, message: Message) {
-    return index;
+    return '_track' + (message.user) ? message.user.name : index.toString();
   }
 }

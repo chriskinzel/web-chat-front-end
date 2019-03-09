@@ -3,6 +3,7 @@ import {BehaviorSubject, Observable} from 'rxjs';
 import {Message} from './message.model';
 import {SocketIO, SocketIOSocket} from '../../socket-io/socket-io.module';
 import {UserService} from '../user-service/user.service';
+import {User} from '../user-service/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -30,8 +31,10 @@ export class MessageService {
 
   private setupEventListeners() {
     const messageHandler = message => {
-      message.timestamp = new Date(message.timestamp);
-      message.isFromCurrentUser = this.userService.currentUser !== undefined &&
+      message.timestamp = message.timestamp && new Date(message.timestamp);
+      message.isFromCurrentUser =
+        this.userService.currentUser !== undefined &&
+        message.user &&
         message.user.name === this.userService.currentUser.name;
 
       this.messagesEmitter.next(
@@ -51,6 +54,17 @@ export class MessageService {
         messageHandler(message);
       });
 
+      this.applicationRef.tick();
+    });
+
+    this.socketIO.on('updateUser', (changeInfo: {target: string, updatedUser: User}) => {
+      const renamedMessages = this.messagesEmitter.value.map(message =>
+        (message.user.name === changeInfo.target)
+          ? Object.assign({}, message, {user: changeInfo.updatedUser})
+          : message
+      );
+
+      this.messagesEmitter.next(renamedMessages);
       this.applicationRef.tick();
     });
 

@@ -1,3 +1,7 @@
 <span *ngIf="message.timestamp">{{message.timestamp | date: dateFormat}} </span>
 <span *ngIf="message.user" [style.color]="message.user.color">{{message.user.name}}: </span>
-<span [class.font-weight-bold]="message.isFromCurrentUser">{{message.content}}</span>
+
+<span *ngIf="message.user"
+      [class.font-weight-bold]="message.isFromCurrentUser">{{message.content}}</span>
+
+<pre *ngIf="!message.user" [innerHTML]="message.content | trustHtml"></pre>
