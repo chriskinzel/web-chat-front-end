@@ -1,3 +1,7 @@
+html {
+  perspective: 300px;
+}
+
 html, body {
   height: 100%;
 }

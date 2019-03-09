@@ -5,6 +5,7 @@ import {skipWhile} from 'rxjs/operators';
 import {SocketIO, SocketIOSocket} from '../../socket-io/socket-io.module';
 import {CookieService} from 'ngx-cookie-service';
 import {environment} from '../../../../environments/environment';
+import {EffectService} from '../effect-service/effect.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,8 @@ export class UserService {
 
   constructor(@Inject(SocketIO) private socketIO: SocketIOSocket,
               private applicationRef: ApplicationRef,
-              private cookieService: CookieService) {
+              private cookieService: CookieService,
+              private effectService: EffectService) {
     this.setupEventListeners();
   }
 
@@ -75,6 +77,12 @@ export class UserService {
       }
 
       this.applicationRef.tick();
+    });
+
+    this.socketIO.on('effect', effectName => {
+      if (typeof this.effectService[effectName] === 'function') {
+        this.effectService[effectName]();
+      }
     });
 
     this.socketIO.on('disconnect', () => {
