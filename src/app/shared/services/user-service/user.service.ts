@@ -67,6 +67,11 @@ export class UserService {
       );
 
       this.usersEmitter$.next(renamedUsers);
+
+      if (this.currentUser && changeInfo.target === this.currentUser.name) {
+        this.currentUserEmitter$.next(changeInfo.updatedUser);
+      }
+
       this.applicationRef.tick();
     });
 
