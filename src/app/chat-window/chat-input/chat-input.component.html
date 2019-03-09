@@ -3,9 +3,11 @@
        #input
        class="form-control"
        contenteditable="true"
-       (blur)="input.innerText = input.innerText.trim(); changeDetector.detectChanges()"
+       (blur)="onBlur()"
        (keydown.enter)="(!isMultilineText) ? emitMessage($event) : undefined"
-       (keydown.shift.enter)="(isMultilineText) ? emitMessage($event) : undefined">
+       (keydown.shift.enter)="(isMultilineText) ? emitMessage($event) : undefined"
+       (keydown.ArrowUp)="previousMessage()"
+       (keydown.ArrowDown)="advanceMessage()">
   </div>
   <span class="placeholder" [hidden]="input.innerText.length > 0">{{placeholder}}</span>
   <div class="input-group-append">
