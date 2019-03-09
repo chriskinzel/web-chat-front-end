@@ -59,7 +59,7 @@ export class MessageService {
 
     this.socketIO.on('updateUser', (changeInfo: {target: string, updatedUser: User}) => {
       const renamedMessages = this.messagesEmitter.value.map(message =>
-        (message.user.name === changeInfo.target)
+        (message.user && message.user.name === changeInfo.target)
           ? Object.assign({}, message, {user: changeInfo.updatedUser})
           : message
       );
