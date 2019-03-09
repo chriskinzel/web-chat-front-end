@@ -17,7 +17,7 @@ export class ChatInputComponent {
   @ViewChild('input') textboxElementRef: ElementRef;
 
   private messageHistory: string[] = [''];
-  private historyPointer = 0;
+  private historyPointer = -1;
 
   constructor(private changeDetector: ChangeDetectorRef,
               private ngZone: NgZone) {}
@@ -28,7 +28,7 @@ export class ChatInputComponent {
     }
 
     this.messageHistory.push(this.textbox.innerText);
-    this.historyPointer = 0;
+    this.historyPointer = -1;
 
     this.message.emit(this.textbox.innerText.trim());
     this.textbox.innerText = '';
@@ -41,8 +41,8 @@ export class ChatInputComponent {
 
   public previousMessage() {
     if (this.messageHistory.length >= 1) {
-      const historyIndex = this.messageHistory.length - this.historyPointer - 1;
       this.historyPointer = Math.min(this.historyPointer + 1, this.messageHistory.length - 1);
+      const historyIndex = this.messageHistory.length - this.historyPointer - 1;
 
       this.textbox.innerText = this.messageHistory[historyIndex];
 
@@ -56,10 +56,14 @@ export class ChatInputComponent {
 
   public advanceMessage() {
     if (this.messageHistory.length >= 1) {
-      this.historyPointer = Math.max(this.historyPointer - 1, 0);
+      this.historyPointer = Math.max(this.historyPointer - 1, -1);
       const historyIndex = this.messageHistory.length - this.historyPointer - 1;
 
-      this.textbox.innerText = this.messageHistory[historyIndex];
+      if (this.historyPointer === -1) {
+        this.textbox.innerText = '';
+      } else {
+        this.textbox.innerText = this.messageHistory[historyIndex];
+      }
 
       this.ngZone.runOutsideAngular(() => {
         setTimeout(() => {
