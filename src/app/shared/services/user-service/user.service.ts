@@ -69,6 +69,7 @@ export class UserService {
       this.usersEmitter$.next(renamedUsers);
 
       if (this.currentUser && changeInfo.target === this.currentUser.name) {
+        this.cookieService.set('user', JSON.stringify(changeInfo.updatedUser));
         this.currentUserEmitter$.next(changeInfo.updatedUser);
       }
 
