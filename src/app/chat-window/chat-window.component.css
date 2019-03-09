@@ -1,3 +1,7 @@
+:host {
+  --user-color: #4c85ff;
+}
+
 .window {
   display: grid;
 
@@ -9,8 +13,6 @@
   width: 100%;
 
   padding: 1rem;
-
-  --user-color: #4c85ff;
 }
 
 messages-window, users-panel {

@@ -10,7 +10,7 @@ import {map} from 'rxjs/operators';
 })
 export class ChatWindowComponent {
   public readonly userColorStyle$ = this.userService.currentUser$.pipe(
-    map(currentUser => `--user-color: ${currentUser.color}`)
+    map(currentUser => `--user-color: ${(currentUser) ? currentUser.color : 'inherit'}`)
   );
 
   constructor(public messageService: MessageService,
