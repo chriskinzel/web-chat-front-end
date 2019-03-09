@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  socketIOURL: 'http://localhost:3000'
+  socketIOURL: 'http://localhost:3000',
+  userCookieKey: 'user'
 };
 
 /*
