@@ -1,3 +1,5 @@
 export const environment = {
-  production: true
+  production: true,
+  socketIOURL: undefined, // Set automatically in production
+  userCookieKey: 'user'
 };
