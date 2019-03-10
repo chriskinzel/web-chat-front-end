@@ -36,6 +36,7 @@ export class EffectService {
           });
         };
 
+        updateDance();
         const danceTimer = setInterval(updateDance, this.danceInterval);
 
         this.stopHandlers.push(() => {
