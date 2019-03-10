@@ -12,8 +12,6 @@ export class EffectService {
   private isFlipped = false;
 
   private readonly danceInterval = 500;
-  private readonly savedTransitionSymbol = Symbol('Saved transition');
-  private readonly savedTransformSymbol = Symbol('Saved transform');
 
   constructor(private ngZone: NgZone) {}
 
@@ -22,15 +20,10 @@ export class EffectService {
       this.isDancing = true;
 
       this.ngZone.runOutsideAngular(() => {
-        this.allElements.forEach(element => {
-          element.style[this.savedTransitionSymbol] = element.style.transition;
-          element.style[this.savedTransformSymbol]  = element.style.transform;
-
-          element.style.transition = `transform ${this.danceInterval / 1000}s`;
-        });
-
         const updateDance = () => {
           this.allElements.forEach(element => {
+            element.style.transition = `transform ${this.danceInterval / 1000}s`;
+
             const randomAngle = Math.random() * 20 - 10;
             element.style.transform = `rotate3d(${Math.random()},${Math.random()},${Math.random()},${randomAngle}deg)`;
           });
@@ -44,18 +37,13 @@ export class EffectService {
             clearInterval(danceTimer);
 
             this.allElements.forEach(element => {
-              if (element.style[this.savedTransitionSymbol] !== undefined) {
-                element.style.transform  = element.style[this.savedTransformSymbol];
-                delete element.style[this.savedTransformSymbol];
-              }
+              element.style.transform = 'rotate3d(1,1,1,0deg)';
             });
 
             setTimeout(() => {
               this.allElements.forEach(element => {
-                if (element.style[this.savedTransitionSymbol] !== undefined) {
-                  element.style.transition = element.style[this.savedTransitionSymbol];
-                  delete element.style[this.savedTransitionSymbol];
-                }
+                element.style.transition = '';
+                element.style.transform = '';
               });
 
               this.isDancing = false;

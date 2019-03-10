@@ -27,7 +27,7 @@ export class ChatInputComponent {
       event.preventDefault();
     }
 
-    this.messageHistory.push(this.textbox.innerText);
+    this.messageHistory.push(this.textbox.innerText.trim());
     this.historyPointer = -1;
 
     this.message.emit(this.textbox.innerText.trim());
@@ -74,7 +74,9 @@ export class ChatInputComponent {
   }
 
   public get isMultilineText(): boolean {
-    return /[\r\n]/g.test(this.textbox.innerText) && this.textbox.innerText.length > 1;
+    return /[\r\n]/g.test(this.textbox.innerText) &&
+      !/\n$/.test(this.textbox.innerText) &&
+      this.textbox.innerText.length > 1;
   }
 
   /**
