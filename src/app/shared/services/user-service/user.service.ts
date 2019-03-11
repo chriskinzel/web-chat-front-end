@@ -37,7 +37,7 @@ export class UserService {
 
   private setupEventListeners() {
     this.socketIO.on('setUser', user => {
-      this.cookieService.set(environment.userCookieKey, JSON.stringify(user));
+      this.cookieService.set(environment.userCookieKey, JSON.stringify(user), 365);
 
       this.currentUserEmitter$.next(user);
       this.applicationRef.tick();
@@ -72,7 +72,7 @@ export class UserService {
       this.usersEmitter$.next(renamedUsers);
 
       if (this.currentUser && changeInfo.target === this.currentUser.name) {
-        this.cookieService.set(environment.userCookieKey, JSON.stringify(changeInfo.updatedUser));
+        this.cookieService.set(environment.userCookieKey, JSON.stringify(changeInfo.updatedUser), 365);
         this.currentUserEmitter$.next(changeInfo.updatedUser);
       }
 
